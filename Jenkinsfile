@@ -61,7 +61,7 @@ pipeline {
             }
         }
 
-	stage('Install Prometheus') {
+	stage('Install Grafana') {
             steps {
                 dir('tomcat') {
                     //sh 'ansible-playbook -i ec2.py playbook/grafana.yml'
