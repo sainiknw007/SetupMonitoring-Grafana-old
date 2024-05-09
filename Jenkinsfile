@@ -41,6 +41,14 @@ pipeline {
         stage('Install Tomcat') {
             steps {
                 dir('tomcat') {
+                    sh 'python3 ec2.py'
+                }
+            }
+        }
+
+        stage('Install Tomcat') {
+            steps {
+                dir('tomcat') {
                     sh 'ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
                 }
             }
