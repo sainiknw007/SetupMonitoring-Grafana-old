@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'monitor'
+    }
     
     stages {
         stage('Checkout') {
