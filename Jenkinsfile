@@ -39,33 +39,40 @@ pipeline {
         
         stage('Install Tomcat') {
             steps {
-                dir('tomcat') {
-                    sh 'ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
-		    //sh 'ls'
+		withCredentials([usernamePassword(credentialsId: 'awscred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {    
+                    dir('tomcat') {
+                        sh 'ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
+		    }
                 }
             }
         }
 
 	stage('Install NodeExporter') {
             steps {
-                dir('tomcat') {
-                    sh 'ansible-playbook -i ec2.py playbook/node_exporter.yml'		    
+		withCredentials([usernamePassword(credentialsId: 'awscred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                    dir('tomcat') {
+                        sh 'ansible-playbook -i ec2.py playbook/node_exporter.yml'
+		    }	    
                 }
             }
         }
 
 	stage('Install Prometheus') {
             steps {
-                dir('tomcat') {
-                    sh 'ansible-playbook -i ec2.py playbook/prometheus.yml'
+		withCredentials([usernamePassword(credentialsId: 'awscred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {    
+                    dir('tomcat') {
+                        sh 'ansible-playbook -i ec2.py playbook/prometheus.yml'
+		    }	    
                 }
             }
         }
 
 	stage('Install Grafana') {
             steps {
-                dir('tomcat') {
-                    sh 'ansible-playbook -i ec2.py playbook/grafana.yml'
+		withCredentials([usernamePassword(credentialsId: 'awscred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {    
+                    dir('tomcat') {
+                        sh 'ansible-playbook -i ec2.py playbook/grafana.yml'
+		    }		    
                 }
             }
         }
