@@ -60,7 +60,7 @@ pipeline {
             steps {
                 dir('tomcat') {
                     //sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/node_exporter.yml"'
-                    sh 'sudo chmod +x ec2.py && ansible-playbook -i ec2.py playbook/node_exporter.yml'
+                    sh 'sudo chmod +x ec2.py && chmod 600 monitor.pem && ansible-playbook -i ec2.py playbook/node_exporter.yml'
                 }       
             }
         }
@@ -68,7 +68,7 @@ pipeline {
         stage('Install Prometheus') {
             steps {
                 dir('tomcat') {
-                    sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/prometheus.yml"'
+                    sh 'sudo chmod +x ec2.py && chmod 600 monitor.pem && ansible-playbook -i ec2.py playbook/prometheus.yml'
                 }       
             }
         }
@@ -76,7 +76,7 @@ pipeline {
         stage('Install Grafana') {
             steps {
                 dir('tomcat') {
-                    sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/grafana.yml"'
+                    sh 'sudo chmod +x ec2.py && chmod 600 monitor.pem && ansible-playbook -i ec2.py playbook/grafana.yml'
                 }           
             }
         }
