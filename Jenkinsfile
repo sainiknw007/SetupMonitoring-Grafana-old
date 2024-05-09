@@ -27,11 +27,11 @@ pipeline {
         stage('Create Infra') {
             steps {
                 dir('ubuntu') {
-                    //sh 'terraform init'
-		    //sh 'terraform validate'
-		    //sh 'terraform plan'
-                    //sh 'terraform apply -auto-approve' 
-		    sh 'ls'
+                    sh 'terraform init'
+		    sh 'terraform validate'
+		    sh 'terraform plan'
+                    sh 'terraform apply -auto-approve' 
+		    //sh 'ls'
                 }
             }
         }
@@ -39,8 +39,8 @@ pipeline {
         stage('Install Tomcat') {
             steps {
                 dir('tomcat') {
-                    //sh 'ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
-		    sh 'ls'
+                    sh 'ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
+		    //sh 'ls'
                 }
             }
         }
@@ -48,7 +48,7 @@ pipeline {
 	stage('Install NodeExporter') {
             steps {
                 dir('tomcat') {
-                    //sh 'ansible-playbook -i ec2.py playbook/node_exporter.yml'		    
+                    sh 'ansible-playbook -i ec2.py playbook/node_exporter.yml'		    
                 }
             }
         }
@@ -56,7 +56,7 @@ pipeline {
 	stage('Install Prometheus') {
             steps {
                 dir('tomcat') {
-                    //sh 'ansible-playbook -i ec2.py playbook/prometheus.yml'
+                    sh 'ansible-playbook -i ec2.py playbook/prometheus.yml'
                 }
             }
         }
@@ -64,7 +64,7 @@ pipeline {
 	stage('Install Grafana') {
             steps {
                 dir('tomcat') {
-                    //sh 'ansible-playbook -i ec2.py playbook/grafana.yml'
+                    sh 'ansible-playbook -i ec2.py playbook/grafana.yml'
                 }
             }
         }
