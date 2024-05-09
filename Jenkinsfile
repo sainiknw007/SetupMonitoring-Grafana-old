@@ -38,7 +38,7 @@ pipeline {
             }
         }
         
-        stage('Install Tomcat') {
+        stage('Verify Host') {
             steps {
                 dir('tomcat') {
                     sh 'python3 ec2.py'
