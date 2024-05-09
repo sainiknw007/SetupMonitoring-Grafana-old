@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'monitor'
+        label 'devops'
     }
     tools {
         // Specify the Git installation by name
