@@ -18,46 +18,53 @@ pipeline {
                 checkout scm
             }
         }
-        
+
+	stage('Copy pem file to tomcat directory') {
+            steps {
+                sh 'cp /home/ubuntu/hostdrive/tomcat/monitor.pem tomcat/'
+            }
+        }
         stage('Create Infra') {
             steps {
                 dir('ubuntu') {
-                    sh 'terraform init'
-		    sh 'terraform validate'
-		    sh 'terraform plan'
-                    sh 'terraform apply -auto-approve'                    
+                    //sh 'terraform init'
+		    //sh 'terraform validate'
+		    //sh 'terraform plan'
+                    //sh 'terraform apply -auto-approve' 
+		    sh 'ls'
                 }
             }
         }
         
         stage('Install Tomcat') {
             steps {
-                dir('ubuntu') {
-                    sh 'ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
+                dir('tomcat') {
+                    //sh 'ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
+		    sh 'ls'
                 }
             }
         }
 
 	stage('Install NodeExporter') {
             steps {
-                dir('ubuntu') {
-                    sh 'ansible-playbook -i ec2.py playbook/node_exporter.yml'
+                dir('tomcat') {
+                    //sh 'ansible-playbook -i ec2.py playbook/node_exporter.yml'		    
                 }
             }
         }
 
 	stage('Install Prometheus') {
             steps {
-                dir('ubuntu') {
-                    sh 'ansible-playbook -i ec2.py playbook/prometheus.yml'
+                dir('tomcat') {
+                    //sh 'ansible-playbook -i ec2.py playbook/prometheus.yml'
                 }
             }
         }
 
 	stage('Install Prometheus') {
             steps {
-                dir('ubuntu') {
-                    sh 'ansible-playbook -i ec2.py playbook/grafana.yml'
+                dir('tomcat') {
+                    //sh 'ansible-playbook -i ec2.py playbook/grafana.yml'
                 }
             }
         }
