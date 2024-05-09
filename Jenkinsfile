@@ -52,7 +52,7 @@ pipeline {
                 dir('tomcat') {
                     sh 'sudo -i -u ubuntu bash -c "ls"'
                     sh 'sudo -i -u ubuntu bash -c "pwd"'
-                    sh 'sudo -i -u ubuntu bash -c "ansible-playbook -i ec2.py playbook/tomcatdemo.yml"'
+                    sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/tomcatdemo.yml"'
                 }
             }
         }
@@ -60,7 +60,7 @@ pipeline {
         stage('Install NodeExporter') {
             steps {
                 dir('tomcat') {
-                    sh 'sudo -i -u ubuntu bash -c "ansible-playbook -i ec2.py playbook/node_exporter.yml"'
+                    sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/node_exporter.yml"'
                 }       
             }
         }
@@ -68,7 +68,7 @@ pipeline {
         stage('Install Prometheus') {
             steps {
                 dir('tomcat') {
-                    sh 'sudo -i -u ubuntu bash -c "ansible-playbook -i ec2.py playbook/prometheus.yml"'
+                    sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/prometheus.yml"'
                 }       
             }
         }
@@ -76,7 +76,7 @@ pipeline {
         stage('Install Grafana') {
             steps {
                 dir('tomcat') {
-                    sh 'sudo -i -u ubuntu bash -c "ansible-playbook -i ec2.py playbook/grafana.yml"'
+                    sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/grafana.yml"'
                 }           
             }
         }
