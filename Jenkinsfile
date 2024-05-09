@@ -21,7 +21,7 @@ pipeline {
         
         stage('Terraform Apply') {
             steps {
-                dir('terraform') {
+                dir('tomcat') {
                     sh 'ls'
                     //sh 'terraform apply -auto-approve'
                 }
@@ -30,7 +30,7 @@ pipeline {
         
         stage('Ansible Playbook') {
             steps {
-                dir('ansible') {
+                dir('ubuntu') {
                     //sh 'ansible-playbook your-playbook.yml'
 		                sh 'ls'
                 }
