@@ -26,12 +26,13 @@ pipeline {
         }
         stage('Create Infra') {
             steps {
-                dir('ubuntu') {
-                    sh 'terraform init'
-		    sh 'terraform validate'
-		    sh 'terraform plan'
-                    sh 'terraform apply -auto-approve' 
-		    //sh 'ls'
+		withCredentials([usernamePassword(credentialsId: 'awscred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                    dir('ubuntu') {
+                        sh 'terraform init'
+		        sh 'terraform validate'
+		        sh 'terraform plan'
+                        sh 'terraform apply -auto-approve' 
+		    }
                 }
             }
         }
