@@ -50,6 +50,8 @@ pipeline {
         stage('Install Tomcat') {
             steps {
                 dir('tomcat') {
+                    sh 'sudo -i -u ubuntu bash -c "ls"'
+                    sh 'sudo -i -u ubuntu bash -c "pwd"'
                     sh 'sudo -i -u ubuntu bash -c "ansible-playbook -i ec2.py playbook/tomcatdemo.yml"'
                 }
             }
