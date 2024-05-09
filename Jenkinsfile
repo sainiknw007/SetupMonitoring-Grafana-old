@@ -52,7 +52,8 @@ pipeline {
                 dir('tomcat') {
                     sh 'sudo -i -u ubuntu bash -c "ls"'
                     sh 'sudo -i -u ubuntu bash -c "pwd"'
-                    sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/tomcatdemo.yml"'
+                    //sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/tomcatdemo.yml"'
+                    sh 'sudo chmod +x ec2.py && ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
                 }
             }
         }
@@ -60,7 +61,8 @@ pipeline {
         stage('Install NodeExporter') {
             steps {
                 dir('tomcat') {
-                    sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/node_exporter.yml"'
+                    //sh 'sudo -i -u ubuntu bash -c "cd $WORKSPACE/tomcat && ansible-playbook -i ec2.py playbook/node_exporter.yml"'
+                    sh 'sudo chmod +x ec2.py && ansible-playbook -i ec2.py playbook/node_exporter.yml'
                 }       
             }
         }
