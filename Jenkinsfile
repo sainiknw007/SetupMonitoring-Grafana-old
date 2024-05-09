@@ -19,20 +19,45 @@ pipeline {
             }
         }
         
-        stage('Terraform Apply') {
+        stage('Create Infra') {
             steps {
-                dir('tomcat') {
-                    sh 'ls'
-                    //sh 'terraform apply -auto-approve'
+                dir('ubuntu') {
+                    sh 'terraform init'
+		    sh 'terraform validate'
+		    sh 'terraform plan'
+                    sh 'terraform apply -auto-approve'                    
                 }
             }
         }
         
-        stage('Ansible Playbook') {
+        stage('Install Tomcat') {
             steps {
                 dir('ubuntu') {
-                    //sh 'ansible-playbook your-playbook.yml'
-		                sh 'ls'
+                    sh 'ansible-playbook -i ec2.py playbook/tomcatdemo.yml'
+                }
+            }
+        }
+
+	stage('Install NodeExporter') {
+            steps {
+                dir('ubuntu') {
+                    sh 'ansible-playbook -i ec2.py playbook/node_exporter.yml'
+                }
+            }
+        }
+
+	stage('Install Prometheus') {
+            steps {
+                dir('ubuntu') {
+                    sh 'ansible-playbook -i ec2.py playbook/prometheus.yml'
+                }
+            }
+        }
+
+	stage('Install Prometheus') {
+            steps {
+                dir('ubuntu') {
+                    sh 'ansible-playbook -i ec2.py playbook/grafana.yml'
                 }
             }
         }
