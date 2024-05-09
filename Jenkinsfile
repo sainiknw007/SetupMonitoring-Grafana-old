@@ -2,8 +2,14 @@ pipeline {
     agent {
         label 'monitor'
     }
-    
+
     stages {
+        stage('git version') {
+            steps {
+                sh 'git --version'
+            }
+        }	    
+    
         stage('Checkout') {
             steps {
                 checkout scm
