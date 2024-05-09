@@ -2,7 +2,10 @@ pipeline {
     agent {
         label 'monitor'
     }
-
+    tools {
+        // Specify the Git installation by name
+        git 'Git'
+    }
     stages {
         stage('git version') {
             steps {
