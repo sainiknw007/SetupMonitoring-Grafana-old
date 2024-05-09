@@ -6,8 +6,8 @@ pipeline {
         git 'Git'
     }
     environment {
-        AWS_ACCESS_KEY_ID = credentials('awscred')
-        AWS_SECRET_ACCESS_KEY = credentials('awscred')
+        AWS_ACCESS_KEY_ID = credentials('awscredid')
+        AWS_SECRET_ACCESS_KEY = credentials('awscredpass')
     }
     stages {
         stage('git version') {
