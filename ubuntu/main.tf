@@ -31,7 +31,7 @@ resource "aws_security_group" "takneekigyanguru_security_group" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["122.171.23.186/32"]
+    cidr_blocks = ["122.171.16.72/32"]
   }
   
   
