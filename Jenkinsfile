@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'devops'
-    }
+    any agent
     tools {
         git 'Git'
     }
