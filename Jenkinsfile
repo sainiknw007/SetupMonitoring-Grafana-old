@@ -3,7 +3,7 @@ pipeline {
         label 'devops'
     }
     tools {
-        git 'git'
+        git 'Git'
     }
     environment {
         AWS_ACCESS_KEY_ID = credentials('awscredid')
